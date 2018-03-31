@@ -1,5 +1,5 @@
 import React from 'react';
-
+import axios from 'axios';
 import Card from './card';
 import Search from '../search/search';
 
@@ -34,27 +34,14 @@ class CardList extends React.Component {
   }
 
   componentDidMount(){
-    this.setState({
-      data: [
-        {title: 'Title 1', desc: 'Descrição 1', detail: 'Detail', img: 'http://materializecss.com/images/office.jpg', link: '#test'},
-        {title: 'Title 2', desc: 'Descrição 2', detail: 'Detail', img: 'http://materializecss.com/images/office.jpg', link: '#test'},
-        {title: 'Title 3', desc: 'Descrição 3', detail: 'Detail', img: 'http://materializecss.com/images/office.jpg', link: '#test'},
-        {title: 'Title 4', desc: 'Descrição 4', detail: 'Detail', img: 'http://materializecss.com/images/office.jpg', link: '#test'},
-        {title: 'Title 5', desc: 'Descrição 5', detail: 'Detail', img: 'http://materializecss.com/images/office.jpg', link: '#test'},
-        {title: 'Title 6', desc: 'Descrição 6', detail: 'Detail', img: 'http://materializecss.com/images/office.jpg', link: '#test'},
-        {title: 'Title 7', desc: 'Descrição 7', detail: 'Detail', img: 'http://materializecss.com/images/office.jpg', link: '#test'}
-      ],
-      server: [
-        {title: 'Title 1', desc: 'Descrição 1', detail: 'Detail', img: 'http://materializecss.com/images/office.jpg', link: '#test'},
-        {title: 'Title 2', desc: 'Descrição 2', detail: 'Detail', img: 'http://materializecss.com/images/office.jpg', link: '#test'},
-        {title: 'Title 3', desc: 'Descrição 3', detail: 'Detail', img: 'http://materializecss.com/images/office.jpg', link: '#test'},
-        {title: 'Title 4', desc: 'Descrição 4', detail: 'Detail', img: 'http://materializecss.com/images/office.jpg', link: '#test'},
-        {title: 'Title 5', desc: 'Descrição 5', detail: 'Detail', img: 'http://materializecss.com/images/office.jpg', link: '#test'},
-        {title: 'Title 6', desc: 'Descrição 6', detail: 'Detail', img: 'http://materializecss.com/images/office.jpg', link: '#test'},
-        {title: 'Title 7', desc: 'Descrição 7', detail: 'Detail', img: 'http://materializecss.com/images/office.jpg', link: '#test'}
-      ]
-    });
-  } 
+    let self = this;
+    axios.get('http://localhost:8000/servidor.php?dados=1').then(function(response){
+        self.setState({
+          data : response.data,
+          server: response.data
+        });
+      });
+    } 
   
   render(){
     let news = this.state.data;
